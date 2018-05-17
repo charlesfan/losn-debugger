@@ -7,6 +7,7 @@
   "author": "Charles Fan",
   "dependencies": {
     "express": "^4.16.3",
+    "lodash": "^4.17.10",
     "mssql": "^4.1.0"
   }
 }
