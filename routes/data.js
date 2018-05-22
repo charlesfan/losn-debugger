@@ -1,4 +1,5 @@
 const express = require('express');
+const moment = require('moment-timezone');
 const router = express.Router();
 const mssql = require('../lib/mssql');
 const schema = require('../lib/mssql-schema');
@@ -21,14 +22,17 @@ router.get('/dev/firmware', function(req, res) {
 	var fetch = 0;
 	var max = 10;
 	if(req.query.start) {
+		let time = moment.tz(parseInt(req.query.start, 10), "Asia/Taipei").format();
 		params.Checkin_time = {
-			value: new Date(parseInt(req.query.start, 10)).toISOString(),
+			value: time,
 			type: 'upper'
 		}
 	}
 	if(req.query.end) {
+		console.log(moment.tz(parseInt(req.query.end, 10), "Asia/Taipei").format());
+		let time = moment.tz(parseInt(req.query.end, 10), "Asia/Taipei").format();
 		params.Checkin_time = {
-			value: new Date(parseInt(req.query.end, 10)).toLocaleString(),
+			value: time,
 			type: 'downner'
 		}
 	}
