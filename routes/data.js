@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mssql = require('../lib/mssql');
 const schema = require('../lib/mssql-schema');
-const sql = require('../lib/sql');
+//const sql = require('../lib/sql');
 const respotority = require('../lib/respotority');
 /*
 router.get('/', function(req, res) {
@@ -10,43 +10,27 @@ router.get('/', function(req, res) {
 });
 */
 
-router.get('/', function(req, res) {
+router.get('/dev/firmware', function(req, res) {
 	let db = new mssql.Server();
-	console.log(new Date(1526832000000));
-	/*let sql = 'select top 100 * from Fulltable where Station_GUID = @id ORDER BY Checkin_time DESC';
-	let input = [
-		{
-			param: 'id',
-			type: schema.FullTable.Station_GUID,
-			value: 'LOSN-607b21'
-		}
-	]
-	db.query(sql, input).then(result => {
-		res.send(result.recordset);
-	});*/
-	/*
-	let params = {};
-	if(req.query.Station_GUID) {
-		params.Station_GUID = req.query.Station_GUID;
-	}
-
-	let select = new sql.Select('Fulltable', params);
-	select.top('100').where({Station_GUID: "\'LOSN-607b21\'"}).run(db).then(result => {
-		res.send(result);
-	});
-	*/
 	let fulltable = new respotority.Fulltable(db);
-	let params = {};
-	let range = [];
+	let params = {
+		Station_GUID: {
+			value: ['LOSN-607990', 'LOSN-607B21', 'LOSN-60895E'],
+		}
+	};
 	var fetch = 0;
 	var max = 10;
 	if(req.query.start) {
-		range[0] = new Date(parseInt(req.query.start, 10)).toISOString();
-		//range[0] = '2018-05-20 00:00:00';
+		params.Checkin_time = {
+			value: new Date(parseInt(req.query.start, 10)).toISOString(),
+			type: 'upper'
+		}
 	}
 	if(req.query.end) {
-		range[1] = new Date(parseInt(req.query.end, 10)).toISOString();
-		//range[1] = '2018-05-21 23:59:00';
+		params.Checkin_time = {
+			value: new Date(parseInt(req.query.end, 10)).toLocaleString(),
+			type: 'downner'
+		}
 	}
 	if(req.query.page) {
 		fetch = req.query.page;
@@ -54,17 +38,19 @@ router.get('/', function(req, res) {
 	if(req.query.max) {
 		max = req.query.max;
 	}
+	if(req.query.Interval_sec) {
+		params.Interval_sec = {
+			value: req.query.Interval_sec,
+			type: 'downner'
+		}
+	}
 
-	fulltable.Select().where(params)
-		.range('Checkin_time', range)
+	fulltable.Select()
+		.where(params)
 		.order('Checkin_time')
 		.offset(fetch, max)
 		.query().then(result => {
 		res.send(result);
 	});
-	/*
-	fulltable.Select().top('100').where(params);
-	res.send(fulltable.getSQL());
-	*/
 });
 module.exports = router;
