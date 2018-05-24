@@ -3,7 +3,7 @@ A debugger for losen.
 #### API
 * Get datas:
 ```
-GET http://<host>/data?page=<int>&number=<int>&start=<timestamp>&end=<timestamp>
+GET http://<host>/data?page=<int>&number=<int>&start=<timestamp>&end=<timestamp>&desc=<boolean>
 ```
 #### Response
 ```
@@ -46,4 +46,20 @@ example:
     }
   ]
 }
+```
+#### Start
+Cloen project and get node modules:
+```
+$ git cloen https://github.com/charlesfan/losen-debugger.git
+$ cd losen-debugger && npm install
+```
+Set up env:
+```
+$ export DB_HOST=192.168.XX.XX
+$ export DB_PASSWORD=XXXXXX
+$ export DB_USER=UserName
+```
+Start server:
+```
+$ node app server
 ```
