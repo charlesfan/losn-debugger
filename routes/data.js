@@ -23,6 +23,7 @@ router.get('/dev/firmware', function(req, res) {
 	};
 	let offset = 0;
 	let max = 10;
+	let desc = false;
 	let resData = {
 		page: offset + 1,
 		number: max,
@@ -52,10 +53,12 @@ router.get('/dev/firmware', function(req, res) {
 		offset = page - 1;
 		resData.page = page;
 	}
+
 	if(req.query.number) {
 		max = parseInt(req.query.number, 10);
 		resData.number = max;
 	}
+
 	if(req.query.Interval_sec) {
 		params.Interval_sec = {
 			value: req.query.Interval_sec,
@@ -64,9 +67,13 @@ router.get('/dev/firmware', function(req, res) {
 		url += '&Interval_sec=' + req.query.Interval_sec;
 	}
 
+	if(req.query.desc && req.query.desc === 'true') {
+		desc = true;
+	}
+
 	fulltable.Select()
 		.where(params)
-		.order('Checkin_time')
+		.order('Checkin_time', desc)
 		.offset(offset*max, max + 1)
 		.query().then(result => {
 			if(result.length === max + 1) {
