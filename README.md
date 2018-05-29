@@ -21,7 +21,7 @@ example:
   page: 1,
   number: 3,
   pre: '',
-  next: '/debug/datas?page=2&number=3&start=1526523044&end=1526523532',
+  next: '/debug/data/dev/firmware?page=2&number=3&start=1526523044&end=1526523532',
   datas: [
     {
       Station_GUID: 'LOSN-607990', 
