@@ -3,7 +3,7 @@ A debugger for losen.
 #### API
 * Get datas:
 ```
-GET http://<host>/data?page=<int>&number=<int>&start=<timestamp>&end=<timestamp>&desc=<boolean>
+GET http://<host>/data/dev/firmware?page=<int>&number=<int>&start=<timestamp>&end=<timestamp>&desc=<boolean>
 ```
 #### Response
 ```
