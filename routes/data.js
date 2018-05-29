@@ -17,9 +17,11 @@ router.get('/dev/firmware', function(req, res) {
 	let db = new mssql.Server();
 	let fulltable = new respotority.Fulltable(db);
 	let params = {
+		/*
 		Station_GUID: {
 			value: ['LOSN-607990', 'LOSN-607B21', 'LOSN-60895E'],
 		}
+		*/
 	};
 	let offset = 0;
 	let max = 10;
@@ -39,6 +41,7 @@ router.get('/dev/firmware', function(req, res) {
 		}
 		url += '&start=' + req.query.start;
 	}
+
 	if(req.query.end) {
 		let time = moment.tz(parseInt(req.query.end, 10), "Asia/Taipei").format();
 		params.Checkin_time = {
@@ -46,6 +49,14 @@ router.get('/dev/firmware', function(req, res) {
 			type: 'downner'
 		}
 		url += '&end=' + req.query.end;
+	}
+
+	if(req.query.guid) {
+		let guid = req.query.guid;
+		params.Station_GUID = {
+			value: guid,
+		}
+		url += '&guid=' + req.query.guid;
 	}
 
 	if(req.query.page) {
@@ -71,6 +82,7 @@ router.get('/dev/firmware', function(req, res) {
 		desc = true;
 	}
 
+	console.log(params);
 	fulltable.Select()
 		.where(params)
 		.order('Checkin_time', desc)
