@@ -35,19 +35,38 @@ router.get('/dev/firmware', function(req, res) {
 
 	if(req.query.start) {
 		let time = moment.tz(parseInt(req.query.start, 10), "Asia/Taipei").format();
+		console.log(time);
+		/*
 		params.Checkin_time = {
 			value: time,
 			type: 'upper'
 		}
+		*/
+		if(!params.Checkin_time) {
+			params.Checkin_time = [];
+		}
+		params.Checkin_time.push({
+			value: time,
+			type: 'upper'
+		});
 		url += '&start=' + req.query.start;
 	}
 
 	if(req.query.end) {
 		let time = moment.tz(parseInt(req.query.end, 10), "Asia/Taipei").format();
+		/*
 		params.Checkin_time = {
 			value: time,
 			type: 'downner'
 		}
+		*/
+		if(!params.Checkin_time) {
+			params.Checkin_time = [];
+		}
+		params.Checkin_time.push({
+			value: time,
+			type: 'downner'
+		});
 		url += '&end=' + req.query.end;
 	}
 
@@ -66,7 +85,9 @@ router.get('/dev/firmware', function(req, res) {
 	}
 
 	if(req.query.number) {
-		max = parseInt(req.query.number, 10);
+		max = (parseInt(req.query.number, 10) <= 100) ?
+			parseInt(req.query.number) :
+			100;
 		resData.number = max;
 	}
 
