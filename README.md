@@ -71,3 +71,12 @@ Start server:
 ```
 $ node app server
 ```
+
+#### Request Params
+* guid(default: all device)
+* page(default: 1)
+* number(default: 100)
+* Interval_sec
+* desc(default: false)
+* start(unix time)
+* end(unix time)
