@@ -6,16 +6,10 @@ const mssql = require('../lib/mssql');
 const schema = require('../lib/mssql-schema');
 const respotority = require('../lib/respotority');
 
-/*
-router.get('/', function(req, res) {
-	res.send('Herer is Debugger!!!!');
-});
-*/
-
 router.get('/dev/firmware', function(req, res) {
 	let url = '/data/dev/firmware?page=%s&number=%s';
 	let db = new mssql.Server();
-	let fulltable = new respotority.Fulltable(db);
+	let fulltable = new respotority.fullTable(db);
 	let params = {
 		/*
 		Station_GUID: {
