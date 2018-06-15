@@ -1,9 +1,7 @@
 const express = require('express');
 const util = require('util');
-const moment = require('moment-timezone');
 const router = express.Router();
 const mssql = require('../lib/mssql');
-const schema = require('../lib/mssql-schema');
 const respotority = require('../lib/respotority');
 
 router.get('/:id/devices', function(req, res) {
