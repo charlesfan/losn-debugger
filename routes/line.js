@@ -15,6 +15,9 @@ router.get('/:id/devices', function(req, res) {
 	};
 
 	stationInfo.Select(['UUID']).where(params).query().then( result => {
+		if(result.length <= 0) {
+			return res.status(404).send('Not Found');
+		}
 		let ids = '';
 		result.forEach(function(value, i) {
 			ids += '\'' + value.UUID + '\'';
