@@ -103,6 +103,8 @@ router.get('/dev/firmware', function(req, res) {
 		.order('Checkin_time', desc)
 		.offset(offset*max, max + 1)
 		.query().then(result => {
+			fulltable.arrAssemble(result);
+
 			if(result.length === max + 1) {
 				result.pop();
 				resData.next = util.format(url, offset + 2, max);
@@ -110,7 +112,7 @@ router.get('/dev/firmware', function(req, res) {
 			if(offset > 0) {
 				resData.pre = util.format(url, offset, max);
 			}
-			resData.datas = result
+			resData.datas = result;
 			res.send(resData);
 	});
 });
