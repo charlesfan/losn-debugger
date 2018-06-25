@@ -79,9 +79,9 @@ router.get('/dev/firmware', function(req, res) {
 	}
 
 	if(req.query.number) {
-		max = (parseInt(req.query.number, 10) <= 100) ?
+		max = (parseInt(req.query.number, 10) <= 300) ?
 			parseInt(req.query.number) :
-			100;
+			300;
 		resData.number = max;
 	}
 
