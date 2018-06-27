@@ -6,7 +6,8 @@ const respotority = require('../lib/respotority');
 
 router.get('/:id/devices', function(req, res) {
 	let db = new mssql.Server();
-	let sql = `SELECT a.Station_UUID, b.Station_Name, b.Position, a.UUID as deviceUUID, a.IP_Address, a.FW_Version
+	let sql = `SELECT a.Station_UUID, b.Station_Name, b.Position, a.UUID as deviceUUID, 
+		a.IP_Address, a.FW_Version, a.Rebooted
 		FROM Device_Info a LEFT JOIN Station_Info b ON a.Station_UUID = b.UUID
 		WHERE a.Station_UUID in (%s) ORDER BY b.Position`;
 	let stationInfo = new respotority.stationInfo(db);
