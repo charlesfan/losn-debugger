@@ -9,6 +9,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "graphql": "^0.13.2",
     "lodash": "^4.17.10",
     "moment-timezone": "^0.5.17",
     "mssql": "^4.1.0"
