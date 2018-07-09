@@ -28,9 +28,11 @@ device.prototype.update = async function(opts, params) {
 	let self = this;
 	let result;
 
+	self.respotority.assemble(params, true);
+
 	try {
-		await self.respotority.Update(opts).where(params).query().then(rows => {
-			result = rows
+		await self.respotority.Update(params).where(opts).query(null, 'rowsAffected').then(r => {
+			result = r;
 		});
 	} catch(e) {
 		console.log(e);

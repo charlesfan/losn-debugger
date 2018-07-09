@@ -30,32 +30,21 @@ router.put('/info/:id', jsonParser, async (req, res) => {
 	let stationId = req.params.id;
 	let db = new mssql.Server();
 	let respotority = new deviceRespotority(db);
-	let deviceInfo;
+
+	let opts = {
+		UUID: {
+			value: req.params.id
+		}
+	}
 
 	try {
-		await respotority.getById(req.body.uuid).then(result => {
-			deviceInfo = result;
+		await respotority.update(opts, req.body).then(result => {
+			res.send(result);
 		});
 	} catch(err) {
 		console.log(err);
 		res.status(500);
 		res.send(err);
-	}
-
-	if(deviceInfo.length > 0) {
-		let params = {UUID: req.body.uuid};
-		let opts = {Station_UUID: stationId};
-
-		try {
-			await respotority.update(opts, params).then(result => {
-				console.log(result);
-				res.send(result);
-			});
-		} catch(err) {
-			console.log(err);
-			res.status(500);
-			res.send(err);
-		}
 	}
 });
 module.exports = router;
