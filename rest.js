@@ -6,8 +6,10 @@ exports.start = function(app) {
 	app.use('/device', require('./routes/device'));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
+	/*
 	app.use('/', function(req, res) {
 		res.send('losen debugger');
 	});
+	*/
 }
 
