@@ -42,8 +42,7 @@ router.put('/info/:id', jsonParser, async (req, res) => {
 			res.send(result);
 		});
 	} catch(err) {
-		console.log(err);
-		res.status(500);
+		res.status(err.code);
 		res.send(err);
 	}
 });
