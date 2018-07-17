@@ -17,4 +17,4 @@ ENV DB_USER=${DB_USER}
 ENV DB_PASSWORD=${DB_PASSWORD}
 ENV DataBase=${DataBase}
 # Run
-CMD ["node", "/losn-debugger/app.js", "server"]
+CMD ["node", "/losn-debugger/app.js", "rest"]
