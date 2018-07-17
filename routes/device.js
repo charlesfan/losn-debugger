@@ -26,6 +26,21 @@ router.get('/ota/ip', function(req, res) {
 	});
 });
 
+router.get('/info/list', async (req, res) => {
+	let db = new mssql.Server();
+	let respotority = new deviceRespotority(db);
+
+	try {
+		await respotority.list(req.query).then(result => {
+			res.send(result);
+		});
+	} catch(err) {
+		console.log(err);
+		res.status(err.code);
+		res.send(err);
+	}
+});
+
 router.put('/info/:id', jsonParser, async (req, res) => {
 	let stationId = req.params.id;
 	let db = new mssql.Server();
