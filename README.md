@@ -5,7 +5,15 @@ A debugger for losen.
 ```
 GET http://<host>/data/dev/firmware?page=<int>&number=<int>&start=<timestamp>&end=<timestamp>&desc=<boolean>
 ```
-#### Response
+* Get devices:
+```
+GET http://<host>/device/info/list?uuid=<string>&stationUUID=<string>&fwVersion=<string>&ipAddress=<string>
+```
+* Update a device:
+```
+PUT "Content-Type: application/json" http://<host>/device/info/:deviceUUID -d '{"stationUUID": <string>, "fwVersion": <string>}'
+```
+#### Response(Get datas)
 ```
 {
   page: <int>,
