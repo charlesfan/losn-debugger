@@ -48,6 +48,7 @@ device.prototype.list = async function(opts) {
 
 	try {
 		await self.respotority.Select().where(_opts).query().then(r => {
+			self.respotority.arrAssemble(r);
 			result = r;
 		});
 		return result;
