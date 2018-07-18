@@ -1,23 +1,8 @@
 const respotority = require('../lib/respotority');
-const tools = require('../lib/tools');
 
 module.exports = device = function(db) {
 	this.respotority = new respotority.deviceInfo(db);
 	this.result = null;
-}
-
-device.prototype.list = async function(params, ...opts) {
-	if(params && tools.isJSON(params)) {
-
-	}
-	try {
-		await self.respotority.Select(opts).query().then(datas => {
-			result = datas;
-		});
-	} catch(e) {
-		console.log(e);
-	}
-	return result;
 }
 
 device.prototype.getById = async function(id, ...opts) {
