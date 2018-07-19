@@ -9,6 +9,14 @@ GET http://<host>/data/dev/firmware?page=<int>&number=<int>&start=<timestamp>&en
 ```
 GET http://<host>/device/info/list?uuid=<string>&stationUUID=<string>&fwVersion=<string>&ipAddress=<string>
 ```
+* Add one device:
+```
+POST "Content-Type: application/json" http://<host>/device -d '{"uuid": <string>, "stationUUID": <string>}'
+```
+* Remove one device:
+```
+DELETE http://<host>/device?uuid=<string>
+```
 * Get stations:
 ```
 GET http://<host>/station/info/list
