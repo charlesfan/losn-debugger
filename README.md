@@ -9,6 +9,14 @@ GET http://<host>/data/dev/firmware?page=<int>&number=<int>&start=<timestamp>&en
 ```
 GET http://<host>/device/info/list?uuid=<string>&stationUUID=<string>&fwVersion=<string>&ipAddress=<string>
 ```
+* Get stations:
+```
+GET http://<host>/station/info/list
+```
+* Get lines:
+```
+GET http://<host>/line/info/list
+```
 * Update a device:
 ```
 PUT "Content-Type: application/json" http://<host>/device/info/:deviceUUID -d '{"stationUUID": <string>, "fwVersion": <string>}'
