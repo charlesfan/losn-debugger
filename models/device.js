@@ -25,6 +25,38 @@ device.prototype.getById = async function(id, ...opts) {
 	return result;
 }
 
+device.prototype.add = async function(opts) {
+	let self = this;
+
+	self.respotority.assemble(opts, true);
+
+	try {
+		await self.respotority.Insert(opts).query(null, 'rowsAffected').then(r => {
+			result = r;
+		});
+		return result;
+	} catch(err) {
+		console.log(err);
+		console.log("ERROR TYPE: " + err.code);
+		let e = {};
+		switch(err.code) {
+			case 'ETIMEOUT':
+				e.code = 504;
+				e.message = 'Request timeout';
+				break;
+			case 'EREQUEST':
+				e.code = 400;
+				e.message = 'INPUT ERROR';
+				break;
+			default:
+				e.code = 503;
+				e.message = 'Service ERROR';
+				break;
+		}
+		throw e;
+	}
+}
+
 device.prototype.list = async function(opts) {
 	let self = this;
 	let result;
