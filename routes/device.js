@@ -41,6 +41,21 @@ router.post('/', jsonParser, async (req, res) => {
 	}
 });
 
+router.delete('/', async (req, res) => {
+	let db = new mssql.Server();
+	let respotority = new deviceRespotority(db);
+
+	try {
+		await respotority.remove(req.query).then(result => {
+			res.send(result);
+		});
+	} catch(err) {
+		console.log(err);
+		res.status(err.code);
+		res.send(err);
+	}
+});
+
 router.get('/info/list', async (req, res) => {
 	let db = new mssql.Server();
 	let respotority = new deviceRespotority(db);
