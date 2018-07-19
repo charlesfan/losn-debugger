@@ -45,6 +45,14 @@ router.delete('/', async (req, res) => {
 	let db = new mssql.Server();
 	let respotority = new deviceRespotority(db);
 
+	if(Object.keys(req.query).length <= 0) {
+		res.status(400);
+		return res.send({
+			code: 400,
+			message: 'Null input'
+		});
+	}
+
 	try {
 		await respotority.remove(req.query).then(result => {
 			res.send(result);

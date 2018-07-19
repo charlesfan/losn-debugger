@@ -63,6 +63,14 @@ device.prototype.remove = async function(opts) {
 
 	let _opts = await self.respotority.json2WhereObj(opts);
 
+	if(Object.keys(_opts).length <= 0) {
+		let e = {
+			code: 400,
+			message: 'INPUT ERROR'
+		};
+		throw e;
+	}
+
 	try {
 		await self.respotority.Delete().where(_opts).query(null, 'rowsAffected').then(r => {
 			result = r;
