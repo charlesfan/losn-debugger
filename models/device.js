@@ -98,14 +98,14 @@ device.prototype.remove = async function(opts) {
 	}
 }
 
-device.prototype.list = async function(opts) {
+device.prototype.list = async function(opts, params) {
 	let self = this;
 	let result;
 
 	let _opts = await self.respotority.json2WhereObj(opts);
 
 	try {
-		await self.respotority.Select().where(_opts).query().then(r => {
+		await self.respotority.Select(params).where(_opts).query().then(r => {
 			self.respotority.arrAssemble(r);
 			result = r;
 		});
