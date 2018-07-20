@@ -45,7 +45,9 @@ station.prototype.empty = async function(opts) {
 
 	let _opts = await self.respotority.json2WhereObj(opts);
 
-	let subSQL = await self.deviceRespotority.Select(['Station_UUID']).getSQL();
+	let subSQL = await self.deviceRespotority
+		.Select(['Station_UUID'])
+		.where({Station_UUID: {type: 'notNull'}}).getSQL();
 
 	_opts['UUID'] = {
 		value: subSQL,
