@@ -20,4 +20,19 @@ router.get('/info/list', async (req, res) => {
 		res.send(err);
 	}
 });
+
+router.get('/info/list/empty', async (req, res) => {
+	let db = new mssql.Server();
+	let respotority = new stationRespotority(db);
+
+	try {
+		await respotority.empty(req.query).then(result => {
+			res.send(result);
+		});
+	} catch(err) {
+		console.log(err);
+		res.status(err.code);
+		res.send(err);
+	}
+});
 module.exports = router;
