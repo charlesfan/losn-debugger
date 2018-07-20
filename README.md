@@ -21,6 +21,10 @@ DELETE http://<host>/device?uuid=<string>
 ```
 GET http://<host>/station/info/list
 ```
+* Get stations(empty):
+```
+GET http://<host>/station/info/list/empty?lineUUID=<string>
+```
 * Get lines:
 ```
 GET http://<host>/line/info/list
